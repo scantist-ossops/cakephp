@@ -183,7 +183,7 @@ class ResultSetFactoryTest extends TestCase
         $statement->method('fetchAll')
             ->will($this->returnValue([$row]));
 
-        $results = $this->factory->createResultSet($query, $statement->fetchAll());
+        $results = $this->factory->createResultSet($statement->fetchAll(), $query);
         $this->assertNotEmpty($results);
     }
 

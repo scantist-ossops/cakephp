@@ -18,6 +18,7 @@ namespace Cake\ORM;
 
 use Cake\Collection\Collection;
 use Cake\Datasource\EntityInterface;
+use Cake\Datasource\ResultSetDecorator;
 use Cake\ORM\Query\SelectQuery;
 
 /**
@@ -31,16 +32,18 @@ class ResultSetFactory
     /**
      * Constructor
      *
-     * @param \Cake\ORM\Query\SelectQuery $query Query from where results came.
      * @param array $results Results array.
+     * @param \Cake\ORM\Query\SelectQuery|null $query Query from where results came.
      * @return \Cake\ORM\ResultSet
      */
-    public function createResultSet(SelectQuery $query, array $results): ResultSet
+    public function createResultSet(array $results, ?SelectQuery $query = null): ResultSet
     {
-        $data = $this->collectData($query);
+        if ($query) {
+            $data = $this->collectData($query);
 
-        foreach ($results as $i => $row) {
-            $results[$i] = $this->groupResult($row, $data);
+            foreach ($results as $i => $row) {
+                $results[$i] = $this->groupResult($row, $data);
+            }
         }
 
         return new ResultSet($results);
@@ -216,5 +219,15 @@ class ResultSetFactory
         }
 
         return $results;
+    }
+
+    /**
+     * Returns the name of the class to be used for decorating results
+     *
+     * @return class-string<\Cake\Datasource\ResultSetInterface>
+     */
+    public function decoratorClass(): string
+    {
+        return ResultSetDecorator::class;
     }
 }
