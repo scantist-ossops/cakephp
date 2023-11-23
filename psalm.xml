@@ -17,6 +17,7 @@
         <ignoreFiles>
             <directory name="vendor/"/>
             <directory name="src/Database/tests/"/>
+            <directory name="src/Datasource/tests/"/>
             <directory name="src/Http/tests/"/>
             <directory name="src/ORM/tests/"/>
             <directory name="src/Validation/tests/"/>
