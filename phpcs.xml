@@ -2,7 +2,7 @@
 <ruleset name="CakePHP Core">
     <config name="installed_paths" value="../../cakephp/cakephp-codesniffer" />
 
-    <rule ref="CakePHP" />
+    <rule ref="CakePHP"/>
 
     <arg value="s"/>
     <!-- pretty sure this is a bug in slevomat -->
